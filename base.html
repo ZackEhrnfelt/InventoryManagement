@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset ='UTF-8'>
+		<meta name='viewport' content = "width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href= "style.css"
+		<link rel="stylesheet" href="{{url_for('static', filename='/style.css') }}">
+	</head>
+
+<body>
+	<header id="main-header">
+		<nav class="navbar">
+			<div class="logo-img">
+				<img src="RESAlogo.png" width = "200" height = "85"></img>
+			</div>
+			<div class="logo"></div>
+
+			<ul>
+				<a href="/">Home Page</a>
+				<a href="/CreateAccount">Create Account</a>
+				<a href="/login">Login</a>
+				<a href="/logout">Logout</a>
+				<a href="/Admin">Admin</a>
+
+				<a href="{{url_for('user', username=current_user.username)}}">Profile</a>
+
+
+			</ul>
+		</nav>
+	</header>
+
+	<header id="side-panel">
+		<nav class="navbar">
+			<ul>
+				<a href="/ManageGroup">Search Inventory</a>
+				<a href="/ManageForum">Manage Inventory</a>
+
+
+				<div class="search">
+					{% if g.user.is_authenticated %}
+					<form style="display: inline;" action="{{ url_for('search') }}"
+						 method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20) }}<input type="submit" value="Search"></form>
+					{% endif %}
+				</div>
+			</ul>
+		</nav>
+	</header>
+</body>
+
+	{% block content %}{% endblock %}
+</html>
