@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+	<section id="services" class="align-middle">
+		<div class="login">
+			<h2>Logout Of Account</h2>
+			<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+				<p>{{ form.submit(class="form-control btn-outline-primary") }}</p>
+			</form>
+		</div>
+	</section>
+{% endblock %}

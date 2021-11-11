@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mt-4">
+    <h2>Item Details</h2>
+<div class="table-responsive">
+    <table class="table table-striped my-2">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Number</th>
+            <th scope="col">Voltage</th>
+            <th scope="col">Description</th>
+            <th scope="col">Location</th>
+            <th scope="col">Image</th>
+            {% if g.user.role == 'admin' %}
+                <th scope="col">Price</th>
+                <th scope="col">Added By User</th>
+                <th scope="col">Created On</th>
+                <th scope="col">Updated On</th>
+                <th scope="col">Actions</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+            {% if items %}
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.item_number }}</td>
+                        <td>{{ item.voltage }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.location }}</td>
+                        <td><a href="{{ url_for('static', filename=item.image) }}" target="_blank">View Image</a></td>
+                        {% if g.user.role == 'admin' %}
+
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.user.username }}</td>
+                            <td>{{ item.created_on }}</td>
+                            <td>{{ item.updated_on }}</td>
+                            <td>
+                                <a href="{{ url_for('add_inventory_items', id=item.id) }}" class="d-block">Edit</a>
+                                <a href="{{ url_for('delete_inventory_item', id=item.id) }}" class="d-block">Delete</a>
+                            </td>
+
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}
