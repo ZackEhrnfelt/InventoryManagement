@@ -19,10 +19,6 @@ def index():
     items = InventoryItem.query.all()
     return render_template('index.html', items=items)
 
-@app.route('/About')
-def about():
-    return render_template('About_Us.html')
-
 mail = Mail(app)
 
 @app.route('/Contact', methods=['GET', 'POST'])
