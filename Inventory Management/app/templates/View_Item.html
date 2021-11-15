@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section id="forumslist">
+		<div class="background">
+			<div class="display">
+				{% for forumname in forumnames %}
+				<div class="item">
+					<a href="{{url_for('forum', forumid=forumname.forumid)}}"><div class="name">
+						{{forumname.forumname}}
+					</div></a>
+					<div class="desc">
+						{{forumname.forumdescription}}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+{% endblock %}
+				
+		
